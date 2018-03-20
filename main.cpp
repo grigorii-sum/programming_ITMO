@@ -17,9 +17,16 @@ class Matrix
             this->rows = rows;
             this->cols = cols;
             this->table = new int*[rows];
-            for(int i = 0; i < this->rows; i++)
+            if ((this->rows >= 0) && (this->cols >= 0))
             {
-                this->table[i] = new int[this->cols];
+                for(int i = 0; i < this->rows; i++)
+                {
+                    this->table[i] = new int[this->cols];
+                }
+            }
+            else
+            {
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IS NEGATIVE";
             }
         }
 
@@ -41,7 +48,7 @@ class Matrix
             {
                 for(int j = 0; j < other.cols; j++)
                 {
-                    put >> other[i][j];
+                    put >> other(i, j);
                 }
             }
             return put;
@@ -54,7 +61,7 @@ class Matrix
             {
                 for(int j = 0; j < other.cols; j++)
                 {
-                    put << other[i][j] << " ";
+                    put << other(i, j) << " ";
                 }
                 put << endl;
             }
@@ -78,8 +85,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -114,8 +120,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -150,8 +155,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -185,8 +189,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -219,8 +222,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -253,8 +255,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT MATCH";
             }
         }
 
@@ -272,9 +273,9 @@ class Matrix
         }
 
         //operator[]
-        int *operator[](int i)
+        int& operator()(int i, int j)
         {
-            return this->table[i];
+            return this->table[i][j];
         }
 
         //transpose
@@ -312,8 +313,7 @@ class Matrix
             }
             else
             {
-                cout << ("ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT SATISFY CONDITION") << endl;
-                exit(1);
+                throw "ERROR: THE NUMBER OF ROWS OR COLUMNS IN MATRICES DOES NOT SATISFY CONDITION";
             }
         }
 };
