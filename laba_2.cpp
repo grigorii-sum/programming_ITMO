@@ -62,7 +62,7 @@ int main()
                         reader.read();
                         Glib::ustring str = reader.get_value();
 
-                        str = str.substr(0, str.find(" ไ") - 2);
+                        str = str.substr(0, str.find(" ะด") - 2);
 
                         if (str != lastAddress)
                         {
